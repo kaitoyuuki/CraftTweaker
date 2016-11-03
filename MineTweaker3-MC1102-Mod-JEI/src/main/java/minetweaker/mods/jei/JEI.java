@@ -7,6 +7,8 @@ import minetweaker.annotations.OnRegister;
 import minetweaker.api.item.IItemStack;
 import minetweaker.util.IEventHandler;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import stanhebben.zenscript.annotations.NotNull;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -65,11 +67,21 @@ public class JEI {
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
-                    if (minetweaker.mods.jei.JEIAddonPlugin.jeiHelpers != null)
-                        minetweaker.mods.jei.JEIAddonPlugin.jeiHelpers.reload();
+                    if (minetweaker.mods.jei.JEIAddonPlugin.jeiHelpers != null) {
+                        //this is such a lazy fix.
+                        //minetweaker.mods.jei.JEIAddonPlugin.jeiHelpers.reload();
+                    }
                 }
             }
         });
+    }
+
+    @SubscribeEvent
+    public void onLoadComplete(FMLLoadCompleteEvent e) {
+        //there's no way in hell this is all I have to do.
+        if (JEIAddonPlugin.jeiHelpers != null) {
+            JEIAddonPlugin.jeiHelpers.reload();
+        }
     }
 
     // list of all hide actions that need to be applied after JEI is available
