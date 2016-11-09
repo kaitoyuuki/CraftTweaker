@@ -25,7 +25,7 @@ import minetweaker.runtime.providers.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -33,7 +33,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.File;
-import java.lang.reflect.*;
 
 /**
  * Main mod class. Performs some general logic, initialization of the API and
@@ -41,10 +40,11 @@ import java.lang.reflect.*;
  *
  * @author Stan Hebben
  */
-@Mod(modid = MineTweakerMod.MODID, version = "3.0.14")
+@Mod(modid = MineTweakerMod.MODID, name = MineTweakerMod.NAME, version = "3.0.14", dependencies = "after:JEI;")
 public class MineTweakerMod {
 	
 	public static final String MODID = "MineTweaker3";
+	public static final String NAME = "MineTweaker 3";
 	public static final String MCVERSION = "1.10.2";
 	
 	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
@@ -109,18 +109,6 @@ public class MineTweakerMod {
 			MineTweakerAPI.registerClassRegistry(REGISTRIES[i], REGISTRY_DESCRIPTIONS[i]);
 		}
 		FuelTweaker.INSTANCE.register();
-		if(Loader.isModLoaded("JEI")) {
-			try {
-				Method register = Class.forName("minetweaker.mods.jei.JEI").getMethod("onRegister");
-				register.invoke(null);
-			} catch(NoSuchMethodException | ClassNotFoundException | InvocationTargetException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	@EventHandler
-	public void onComplete(FMLLoadCompleteEvent ev) {
 		MineTweakerAPI.logInfo("MineTweaker: Building registry");
 		ItemBracketHandler.rebuildItemRegistry();
 		LiquidBracketHandler.rebuildLiquidRegistry();
@@ -128,6 +116,11 @@ public class MineTweakerMod {
 		GlobalRegistry.registerBracketHandler(new ItemBracketHandler());
 		GlobalRegistry.registerBracketHandler(new LiquidBracketHandler());
 		GlobalRegistry.registerBracketHandler(new OreBracketHandler());
+	}
+	
+	@EventHandler
+	public void onComplete(FMLLoadCompleteEvent ev) {
+		
 	}
 	
 	@EventHandler
