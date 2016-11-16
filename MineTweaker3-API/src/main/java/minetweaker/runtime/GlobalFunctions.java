@@ -28,5 +28,4 @@ public class GlobalFunctions {
 		MineTweakerAPI.tweaker.enableDebug();
 	}
 	
-	
 }
