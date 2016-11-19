@@ -57,8 +57,10 @@ public class JEI {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                if (JEIAddonPlugin.jeiHelpers != null)
-                    JEIAddonPlugin.jeiHelpers.reload();
+                if (JEIAddonPlugin.jeiHelpers != null) {
+                    /*JEIAddonPlugin.jeiHelpers.reload();//are you okay? you've reloaded
+                    * //twice now, you know.*/
+                }
             }
         });
     }

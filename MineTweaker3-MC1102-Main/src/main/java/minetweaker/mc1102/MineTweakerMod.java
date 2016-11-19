@@ -40,7 +40,7 @@ import java.io.File;
  *
  * @author Stan Hebben
  */
-@Mod(modid = MineTweakerMod.MODID, name = MineTweakerMod.NAME, version = "3.0.14", dependencies = "after:JEI;")
+@Mod(modid = MineTweakerMod.MODID, name = MineTweakerMod.NAME, version = "3.0.15", dependencies = "after:JEI;")
 public class MineTweakerMod {
 	
 	public static final String MODID = "MineTweaker3";

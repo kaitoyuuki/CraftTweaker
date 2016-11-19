@@ -26,7 +26,7 @@ public class JEIAddonPlugin implements IModPlugin {
             MineTweakerImplementationAPI.onPostReload(new IEventHandler<MineTweakerImplementationAPI.ReloadEvent>() {
                 @Override
                 public void handle(MineTweakerImplementationAPI.ReloadEvent event) {
-                    jeiHelpers.reload();
+                    /*jeiHelpers.reload();//no we're not doing that.*/
                 }
             });
             eventAdded = true;
